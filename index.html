@@ -135,12 +135,13 @@
     }
 
     .request-btn {
+      display: inline-block;
       background-color: #2e7d32;
       color: white;
       padding: 8px 14px;
       border-radius: 8px;
-      border: none;
-      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
     }
 
     .rating {
@@ -256,7 +257,7 @@
             </div>
             <div class="rating">Rating: ${user.rating}</div>
           </div>
-          <button class="request-btn">Request</button>
+          <a href="userRequest.html" class="request-btn">Request</a>
         </div>
       `;
     }
