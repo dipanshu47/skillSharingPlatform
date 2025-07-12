@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>User Profile</title>
   <style>
     body {
@@ -143,116 +143,116 @@
   <div class="container">
     <header class="header">
       <div class="actions">
-        <button class="save-btn">Save</button>
-        <button class="discard-btn">Discard</button>
+        <button class="save-btn" type="submit" form="userProfileForm">Save</button>
+        <button class="discard-btn" type="reset" form="userProfileForm">Discard</button>
         <button class="discard-btn">Logout</button>
       </div>
       <nav class="nav">
         <a href="swaprequest.html">Swap Requests</a>
         <a href="index.html">Home</a>
-        <div class="avatar">
-          <img src="https://i.pravatar.cc/40" alt="User Avatar">
+        <div class="avatar" id="avatarContainer">
+          <img src="https://i.pravatar.cc/40" alt="User Avatar" id="avatarImg">
         </div>
       </nav>
     </header>
 
     <main class="profile-form">
       <h2>User Profile</h2>
-
-      <!-- Skills Offered -->
-      <div class="form-section">
-        <label>Skills Offered</label>
-        <div class="tags" id="skills-offered">
-          <span class="tag">Graphic Design <button onclick="removeTag(this)">&times;</button></span>
+      <form id="userProfileForm" action="/submit-profile" method="POST" enctype="multipart/form-data">
+        <!-- Skills Offered -->
+        <div class="form-section">
+          <label>Skills Offered</label>
+          <div class="tags" id="skills-offered">
+            <span class="tag">Graphic Design 
+              <button onclick="removeTag(this)" type="button">&times;</button>
+              <input type="hidden" name="skillsOffered[]" value="Graphic Design">
+            </span>
+          </div>
+          <select id="skillDropdown" onchange="addSkillFromDropdown()" name="skillDropdown">
+            <option value="">-- Select Skill --</option>
+            <option value="UI Design">UI Design</option>
+            <option value="Figma">Figma</option>
+            <option value="ReactJS">ReactJS</option>
+            <option value="Video Editing">Video Editing</option>
+          </select>
+          <button class="add-skill-btn" type="button" onclick="toggleSkillInput()">+ Add New Skill</button>
+          <div id="add-skill-section" style="display: none; margin-top: 10px;">
+            <input type="text" id="newSkillInput" placeholder="Enter new skill" />
+            <button type="button" onclick="addNewSkill()">Add</button>
+          </div>
         </div>
-        <select id="skillDropdown" onchange="addSkillFromDropdown()">
-          <option value="">-- Select Skill --</option>
-          <option value="UI Design">UI Design</option>
-          <option value="Figma">Figma</option>
-          <option value="ReactJS">ReactJS</option>
-          <option value="Video Editing">Video Editing</option>
-        </select>
-        <button class="add-skill-btn" onclick="toggleSkillInput()">+ Add New Skill</button>
-        <div id="add-skill-section" style="display: none; margin-top: 10px;">
-          <input type="text" id="newSkillInput" placeholder="Enter new skill" />
-          <button onclick="addNewSkill()">Add</button>
+
+        <!-- Skills Wanted -->
+        <div class="form-section">
+          <label>Skills Wanted</label>
+          <div class="tags" id="skills-wanted">
+            <span class="tag">Python 
+              <button onclick="removeTag(this)" type="button">&times;</button>
+              <input type="hidden" name="skillsWanted[]" value="Python">
+            </span>
+          </div>
+          <select id="skillWantedDropdown" onchange="addWantedSkillFromDropdown()" name="skillWantedDropdown">
+            <option value="">-- Select Skill --</option>
+            <option value="UI Design">UI Design</option>
+            <option value="Video Editing">Video Editing</option>
+            <option value="Project Management">Project Management</option>
+            <option value="Java">Java</option>
+            <option value="ReactJS">ReactJS</option>
+          </select>
+          <button class="add-skill-btn" type="button" onclick="toggleWantedSkillInput()">+ Add New Skill</button>
+          <div id="add-wanted-skill-section" style="display: none; margin-top: 10px;">
+            <input type="text" id="newWantedSkillInput" placeholder="Enter new skill" />
+            <button type="button" onclick="addNewWantedSkill()">Add</button>
+          </div>
         </div>
-      </div>
 
-      <!-- Skills Wanted -->
-      <div class="form-section">
-        <label>Skills Wanted</label>
-        <div class="tags" id="skills-wanted">
-          <span class="tag">Python <button onclick="removeTag(this)">&times;</button></span>
+        <!-- Availability -->
+        <div class="form-section">
+          <label>Availability</label>
+          <select id="availability" name="availability">
+            <option value="">Select Availability</option>
+            <option value="Evenings">Evenings</option>
+            <option value="Part Time">Part Time</option>
+            <option value="Full Time">Full Time</option>
+            <option value="Weekends">Weekends</option>
+            <option value="Week Days">Week Days</option>
+          </select>
         </div>
-        <select id="skillWantedDropdown" onchange="addWantedSkillFromDropdown()">
-          <option value="">-- Select Skill --</option>
-          <option value="UI Design">UI Design</option>
-          <option value="Video Editing">Video Editing</option>
-          <option value="Project Management">Project Management</option>
-          <option value="Java">Java</option>
-          <option value="ReactJS">ReactJS</option>
-        </select>
-        <button class="add-skill-btn" onclick="toggleWantedSkillInput()">+ Add New Skill</button>
-        <div id="add-wanted-skill-section" style="display: none; margin-top: 10px;">
-          <input type="text" id="newWantedSkillInput" placeholder="Enter new skill" />
-          <button onclick="addNewWantedSkill()">Add</button>
+
+        <!-- Address -->
+        <div class="form-section">
+          <label>Address</label>
+          <input type="text" name="address" placeholder="Enter your address">
         </div>
-      </div>
 
-      <!-- Availability -->
-      <div class="form-section">
-        <select id="availability">
-      <option>Availability</option>
-      <option>Evenings</option>
-      <option>Part Time</option>
-      <option>Full Time</option>
-      <option>Weekends</option>
-      <option>Week Days</option>
-    </select>
-      </div>
+        <!-- Profile Visibility -->
+        <div class="form-section">
+          <label>Profile Visibility</label>
+          <select name="visibility">
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
+        </div>
 
-      <!-- Address -->
-      <div class="form-section">
-        <label>Address</label>
-        <input type="text" placeholder="Enter your address">
-      </div>
-
-      <!-- Profile Visibility -->
-      <div class="form-section">
-        <label>Profile</label>
-        <select>
-          <option value="public">Public</option>
-          <option value="private">Private</option>
-        </select>
-      </div>
-
-      <!-- Profile Photo -->
-      <div class="form-section">
-        <label>Profile Photo</label>
-        <button class="photo-btn" onclick="document.getElementById('photoInput').click()">Add/Edit</button>
-        <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="updateProfilePhoto(event)">
-        <button class="remove-btn" onclick="removeProfilePhoto()">Remove</button>
-      </div>
+        <!-- Profile Photo -->
+        <div class="form-section">
+          <label>Profile Photo</label>
+          <button class="photo-btn" type="button" onclick="document.getElementById('photoInput').click()">Add/Edit</button>
+          <input type="file" id="photoInput" name="profilePhoto" accept="image/*" style="display: none;" onchange="updateProfilePhoto(event)">
+          <button class="remove-btn" type="button" onclick="removeProfilePhoto()">Remove</button>
+        </div>
+      </form>
     </main>
   </div>
 
   <script>
-    // Remove tag
     function removeTag(button) {
       button.parentElement.remove();
     }
 
-    // Profile Photo Functions
-    function removeProfilePhoto() {
-      const avatarImg = document.querySelector('.avatar');
-      avatarImg.style.display = 'none';
-      alert('Profile photo removed.');
-    }
-
     function updateProfilePhoto(event) {
       const file = event.target.files[0];
-      const avatarImg = document.querySelector('.avatar img');
+      const avatarImg = document.getElementById("avatarImg");
 
       if (file) {
         const reader = new FileReader();
@@ -263,7 +263,12 @@
       }
     }
 
-    // Skills Offered Functions
+    function removeProfilePhoto() {
+      const avatar = document.getElementById("avatarContainer");
+      avatar.style.display = 'none';
+      alert('Profile photo removed.');
+    }
+
     function toggleSkillInput() {
       const section = document.getElementById("add-skill-section");
       section.style.display = section.style.display === "none" ? "block" : "none";
@@ -277,7 +282,8 @@
       if (skillName) {
         const span = document.createElement("span");
         span.className = "tag";
-        span.innerHTML = `${skillName} <button onclick="removeTag(this)">&times;</button>`;
+        span.innerHTML = `${skillName} <button onclick="removeTag(this)" type="button">&times;</button>
+          <input type="hidden" name="skillsOffered[]" value="${skillName}">`;
         skillsContainer.appendChild(span);
         input.value = "";
       } else {
@@ -292,13 +298,13 @@
         const skillsContainer = document.getElementById("skills-offered");
         const span = document.createElement("span");
         span.className = "tag";
-        span.innerHTML = `${skillName} <button onclick="removeTag(this)">&times;</button>`;
+        span.innerHTML = `${skillName} <button onclick="removeTag(this)" type="button">&times;</button>
+          <input type="hidden" name="skillsOffered[]" value="${skillName}">`;
         skillsContainer.appendChild(span);
         dropdown.value = "";
       }
     }
 
-    // Skills Wanted Functions
     function toggleWantedSkillInput() {
       const section = document.getElementById("add-wanted-skill-section");
       section.style.display = section.style.display === "none" ? "block" : "none";
@@ -312,7 +318,8 @@
       if (skillName) {
         const span = document.createElement("span");
         span.className = "tag";
-        span.innerHTML = `${skillName} <button onclick="removeTag(this)">&times;</button>`;
+        span.innerHTML = `${skillName} <button onclick="removeTag(this)" type="button">&times;</button>
+          <input type="hidden" name="skillsWanted[]" value="${skillName}">`;
         skillsContainer.appendChild(span);
         input.value = "";
       } else {
@@ -327,7 +334,8 @@
         const skillsContainer = document.getElementById("skills-wanted");
         const span = document.createElement("span");
         span.className = "tag";
-        span.innerHTML = `${skillName} <button onclick="removeTag(this)">&times;</button>`;
+        span.innerHTML = `${skillName} <button onclick="removeTag(this)" type="button">&times;</button>
+          <input type="hidden" name="skillsWanted[]" value="${skillName}">`;
         skillsContainer.appendChild(span);
         dropdown.value = "";
       }
