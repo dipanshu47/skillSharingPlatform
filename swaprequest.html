@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skill Swap Request</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: whitesmoke;
+      color: #2e7d32;
+      padding: 20px;
+    }
+
+    .navbar {
+      background-color: #ffffff;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 6px;
+    }
+
+    .navbar .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .navbar .nav-links a {
+      text-decoration: none;
+      color: #2e7d32;
+      font-size: 16px;
+    }
+
+    .navbar .profile-photo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2e7d32;
+    }
+
+    .container {
+      padding: 20px 40px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .filters select,
+    .filters input[type="text"] {
+      padding: 8px 12px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    .filters button {
+      margin-left: 10px;
+      padding: 8px 15px;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .card {
+      background-color: white;
+      border: 2px solid #2e7d32;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile-details {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-photo-placeholder {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid #2e7d32;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      text-align: center;
+      color: #555;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .details span {
+      display: block;
+      color: #333;
+    }
+
+    .status-section {
+      text-align: right;
+    }
+
+    .status-section .pending {
+      color: #ff9800;
+    }
+
+    .status-section .accepted {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .status-section .rejected {
+      color: red;
+      font-weight: bold;
+    }
+
+    .action-buttons button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .action-buttons .accept-btn {
+      background-color: transparent;
+      color: #2e7d32;
+    }
+
+    .action-buttons .reject-btn {
+      background-color: transparent;
+      color: red;
+    }
+
+    .pagination {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .pagination span {
+      margin: 0 5px;
+      cursor: pointer;
+      color: #2e7d32;
+    }
+
+    .pagination span:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Skill Share</div>
+    <div class="nav-links">
+      <a href="./index.html">Home</a>
+      <img src="https://i.imgur.com/fXHdG0B.png" alt="User" class="profile-photo" />
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="filters">
+      <div>
+        <select>
+          <option>Pending</option>
+          <option>Accepted</option>
+          <option>Rejected</option>
+        </select>
+      </div>
+      <div>
+        <input type="text" placeholder="Search..." />
+        <button>Search</button>
+      </div>
+    </div>
+
+    <!-- Request Card 1 -->
+    <div class="card" id="request1">
+      <div class="profile-details">
+        <div class="profile-photo-placeholder">Profile Photo</div>
+        <div class="details">
+          <span><strong>Marc Demo</strong></span>
+          <span>Skill Offered => <u>JavaScript</u></span>
+          <span>Skill Wanted => <u>Python</u></span>
+          <span>Rating: 4/5</span>
+        </div>
+      </div>
+      <div class="status-section">
+        <div class="status-text pending" id="status1">Status: Pending</div>
+        <div class="action-buttons">
+          <button class="accept-btn" onclick="acceptRequest('request1')">Accept</button>
+          <button class="reject-btn" onclick="rejectRequest('request1')">Reject</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Request Card 2 -->
+    <div class="card" id="request2">
+      <div class="profile-details">
+        <div class="profile-photo-placeholder">Profile Photo</div>
+        <div class="details">
+          <span><strong>Name</strong></span>
+          <span>Skill Offered => <u>HTML</u></span>
+          <span>Skill Wanted => <u>CSS</u></span>
+          <span>Rating: 3.9/5</span>
+        </div>
+      </div>
+      <div class="status-section">
+        <div class="status-text rejected" id="status2">Status: Rejected</div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <span>&lt;</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>&gt;</span>
+    </div>
+  </div>
+
+  <script>
+    function acceptRequest(cardId) {
+      const card = document.getElementById(cardId);
+      const statusText = card.querySelector('.status-text');
+      const buttons = card.querySelector('.action-buttons');
+      statusText.textContent = 'Status: Accepted';
+      statusText.classList.remove('pending');
+      statusText.classList.add('accepted');
+      buttons.innerHTML = '<span class="accepted">Accepted</span>';
+    }
+
+    function rejectRequest(cardId) {
+      const card = document.getElementById(cardId);
+      const statusText = card.querySelector('.status-text');
+      const buttons = card.querySelector('.action-buttons');
+      statusText.textContent = 'Status: Rejected';
+      statusText.classList.remove('pending');
+      statusText.classList.add('rejected');
+      buttons.innerHTML = '<span class="rejected">Rejected</span>';
+    }
+  </script>
+
+</body>
+</html>
