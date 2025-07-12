@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile - Skill Swap Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="actions">
+        <button class="save-btn">Save</button>
+        <button class="discard-btn">Discard</button>
+      </div>
+      <nav class="nav">
+        <a href="#">Swap Requests</a>
+        <a href="#">Home</a>
+        <div class="avatar">
+          <img src="https://i.pravatar.cc/40" alt="User Avatar">
+        </div>
+      </nav>
+    </header>
+
+    <main class="profile-form">
+      <h2>User Profile</h2>
+
+    <div class="form-section">
+        <label>Skills Offered</label>
+    <div class="tags" id="skills-offered">
+        <span class="tag">Graphic Design <button onclick="removeTag(this)">&times;</button></span>
+        <span class="tag">Video Editing <button onclick="removeTag(this)">&times;</button></span>
+        <span class="tag">Photoshop <button onclick="removeTag(this)">&times;</button></span>
+    </div>
+        <button class="add-skill-btn" onclick="toggleSkillInput()">+ Add New Skill</button>
+        <div id="add-skill-section" style="display: none; margin-top: 10px;">
+        <input type="text" id="newSkillInput" placeholder="Enter new skill" />
+        <button onclick="addNewSkill()">Add</button>
+    </div>
+    </div>
+
+
+      <div class="form-section">
+        <label>Skills Wanted</label>
+        <div class="tags" id="skills-wanted">
+          <span class="tag">Python <button>&times;</button></span>
+          <span class="tag">JavaScript <button>&times;</button></span>
+          <span class="tag">Manager <button>&times;</button></span>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <label>Availability</label>
+        <input type="text" placeholder="e.g. weekends">
+      </div>
+
+      <div class="form-section">
+        <label>Profile</label>
+        <select>
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+      </div>
+
+      <div class="profile-photo">
+        <p>Profile Photo</p>
+
+        <!-- Add/Edit Button with file input -->
+
+        <button class="photo-btn" onclick="document.getElementById('photoInput').click()">Add/Edit</button>
+        <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="updateProfilePhoto(event)">
+
+        <button class="remove-btn" onclick= "removeProfilePhoto()">Remove</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+
+    // Removing Skills 
+
+document.querySelectorAll('.tag button').forEach(button => {
+  button.addEventListener('click', () => {
+    button.parentElement.remove();
+  });
+});
+
+    // Removing profile photo
+
+function removeProfilePhoto() {
+  const avatarImg = document.querySelector('.avatar');
+  avatarImg.style.display = 'none';
+  alert('Profile photo removed.');
+}
+
+// Inserting New Profile Photo
+
+function updateProfilePhoto(event) {
+  const file = event.target.files[0];
+  const avatarImg = document.querySelector('.avatar img');
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      avatarImg.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function toggleSkillInput() {
+  const section = document.getElementById("add-skill-section");
+  section.style.display = section.style.display === "none" ? "block" : "none";
+}
+
+function addNewSkill() {
+  const input = document.getElementById("newSkillInput");
+  const skillName = input.value.trim();
+  const skillsContainer = document.getElementById("skills-offered");
+
+  if (skillName) {
+    const span = document.createElement("span");
+    span.className = "tag";
+    span.innerHTML = `${skillName} <button onclick="removeTag(this)">&times;</button>`;
+    skillsContainer.appendChild(span);
+    input.value = ""; // clear input
+  } else {
+    alert("Please enter a skill name.");
+  }
+}
+
+function removeTag(button) {
+  button.parentElement.remove();
+}
+
+
+
+  </script>
+</body>
+</html>
