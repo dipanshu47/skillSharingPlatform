@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skill Share Platform</title>
+  <link rel="stylesheet" href="stylesheet.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">Skill Share</div>
+    <div class="navbar-middle"><a href="#">Swap Request</a></div>
+    <div class="navbar-right">
+     <a href="userProfile.html"> <img src="https://i.ibb.co/rZ3BVK9/profile-icon.png" alt="User Profile" class="profile-img" name="user-profile" />  </a>
+    </div>
+  </nav>
+
+  <section class="search-section">
+    <select id="availability">
+      <option>Availability</option>
+      <option>Available</option>
+      <option>Not Available</option>
+    </select>
+    <input type="text" placeholder="Search..." id="searchBox"/>
+    <button onclick="searchUsers()">Search</button>
+  </section>
+
+  <section class="user-cards" id="userCards">
+    
+    <!--User Card is inserted using Javascript-->
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
